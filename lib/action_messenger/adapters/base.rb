@@ -5,10 +5,10 @@ module ActionMessenger
         @params = params
       end
 
-      def send_message(_body, _params = {})
-        raise ArgumentError, 'You should provide at least one phone for sending messages' unless senders.present?
+      def send_message(_message, _params = {})
+        # raise ArgumentError, 'You should provide at least one phone for sending messages' unless senders.present?
 
-        @from = pick_sender
+        # @from = pick_sender
       end
 
       def senders

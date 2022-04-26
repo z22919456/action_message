@@ -45,7 +45,9 @@ module ActionMessenger
         nil
       else
         # TODO: add logger 'Sending message from "number" to "number"'
-        adapter.send_message(to: to, message: message, options: options)
+        ActiveSupport::Notifications.instrument('deliver.action_messenger', { messagage: message, to: to }) do
+          adapter.send_message(message, to: to, options: options)
+        end
       end
     end
   end

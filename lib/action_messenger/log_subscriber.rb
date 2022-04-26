@@ -2,10 +2,9 @@ require 'active_support/log_subscriber'
 
 module ActionMessenger
   class LogSubscriber < ActiveSupport::LogSubscriber
-    def deliver(event)
+    def deliver(_event)
       info do
-        preform_adapter = event.payload[:preform_deliveries]
-        '?????????????'
+        # preform_adapter = event.payload[:preform_deliveries]
       end
     end
 
@@ -13,7 +12,7 @@ module ActionMessenger
       debug do
         messenger = event.payload[:messenger]
         action = event.payload[:action]
-        # "#{adapter}##{action}: processed SMS in #{event.duration.round(1)}ms"
+        "#{messenger}##{action}: processed SMS in #{event.duration.round(1)}ms"
       end
     end
 

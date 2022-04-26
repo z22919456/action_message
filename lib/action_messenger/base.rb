@@ -62,17 +62,10 @@ module ActionMessenger
 
       def method_missing(method_name, *args) # :nodoc:
         if action_methods.include? method_name.to_s
-          # puts "===method missing, #{self.class.name}"
-          # puts method_name
-          # puts(*args)
           MessageDelivery.new(self, method_name, *args)
         else
           super
         end
-      end
-
-      def mailer_name
-        @mailer_name ||= anonymous? ? 'anonymous' : name.underscore
       end
     end
 
@@ -89,15 +82,12 @@ module ActionMessenger
       raise ArgumentError, 'You need to provide at least a receipient' if params[:to].blank?
       return message if @_message_was_called && !block
 
-      puts '===sms'
-      puts params
-      puts block
-
       self.template_name = params[:template_name].presence || template_name
       self.template_path = params[:template_path].presence || template_path
 
       @_message_was_called = true
-      lookup_context.view_paths = (lookup_context.view_paths.to_a + self.class.base_paths).flatten.uniq
+
+      # elookup_context.view_paths = (lookup_context.view_paths.to_a + self.class.base_paths).flatten.uniq
 
       message.to = params[:to]
       message.debug = params[:debug]
@@ -109,9 +99,8 @@ module ActionMessenger
 
     def process(method_name, *args)
       payload = {
-        message: self.class.name,
-        action: method_name,
-        args: args
+        messenger: self.class.name,
+        action: method_name
       }
 
       self.template_path ||= self.class.name.underscore

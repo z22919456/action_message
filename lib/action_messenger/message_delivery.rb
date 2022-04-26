@@ -6,18 +6,14 @@ module ActionMessenger
       @messenger_class = messenger_class
       @action = action
       @args = args
-      puts '===MessengerDeliver'
-      puts @args
     end
 
     def deliver_now
-      puts "===Deliver_now, #{self.class.name}"
-      puts processed_messenger
-      processed_messenger.send(action, *args).deliver
+      processed_messenger.send(action, @args).deliver
     end
 
-    def deliver_later(options = {})
-      enqueue_delivery :deliver_now, options
+    def deliver_later(_options = {})
+      enqueue_delivery :deliver_now, optionse
     end
 
     protected
