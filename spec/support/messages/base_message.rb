@@ -1,4 +1,4 @@
-class BaseMessage < ActionMessage::Base
+class BaseMessage < ActionMessenger::Base
   prepend_view_path 'spec/support/views'
 
   def welcome_with_one_argument(person_name)

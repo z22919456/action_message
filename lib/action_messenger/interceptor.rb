@@ -1,10 +1,10 @@
-module ActionMessage
+module ActionMessenger
   class Interceptor
     cattr_accessor :blacklist
     self.blacklist = {}
 
     class << self
-      def register(conditions={})
+      def register(conditions = {})
         raise TypeError, 'Invalid type. Please provide a hash object' unless conditions.methods.include?(:key)
 
         conditions.each do |attribute, condition|
@@ -12,7 +12,6 @@ module ActionMessage
           @@blacklist[attribute.to_sym].push(condition)
         end
       end
-
 
       def registered_for?(message)
         @@blacklist.each do |attribute, conditions|
@@ -23,13 +22,14 @@ module ActionMessage
           end
         end
 
-        return false
+        false
       end
 
       private
-        def match_method_for(condition)
-          condition.is_a?(Regexp)? :=~ : :==
-        end
+
+      def match_method_for(condition)
+        condition.is_a?(Regexp) ? :=~ : :==
+      end
     end
   end
 end

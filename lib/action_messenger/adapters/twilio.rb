@@ -1,11 +1,17 @@
-require 'twilio-ruby'
+# require 'twilio-ruby'
 
-module ActionMessage
+module ActionMessenger
   module Adapters
     class Twilio < Base
-      def initialize(params={})
-        raise ArgumentError, 'account_sid is a mandatory setting for sending messages through Twilio' unless params[:account_sid].present?
-        raise ArgumentError, 'auth_token is a mandatory setting for sending messages through Twilio' unless params[:auth_token].present?
+      def initialize(params = {})
+        unless params[:account_sid].present?
+          raise ArgumentError,
+                'account_sid is a mandatory setting for sending messages through Twilio'
+        end
+        unless params[:auth_token].present?
+          raise ArgumentError,
+                'auth_token is a mandatory setting for sending messages through Twilio'
+        end
 
         @account_sid = params[:account_sid]
         @auth_token = params[:auth_token]
@@ -17,7 +23,7 @@ module ActionMessage
         @client ||= ::Twilio::REST::Client.new(@account_sid, @auth_token)
       end
 
-      def send_message(body, params={})
+      def send_message(body, params = {})
         super(body, params)
 
         sms = {
@@ -25,7 +31,7 @@ module ActionMessage
           from: @from,
           body: body
         }
-        
+
         sms.merge!(media_url: params[:media_url]) if params[:media_url].present?
 
         client.api.account.messages.create(sms)

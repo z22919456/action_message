@@ -1,8 +1,8 @@
-require 'action_message/adapters/base'
-require 'action_message/adapters/test'
-require 'action_message/adapters/twilio'
+require 'action_messenger/adapters/base'
+require 'action_messenger/adapters/test'
+require 'action_messenger/adapters/twilio'
 
-module ActionMessage
+module ActionMessenger
   module Adapters
     class << self
       def adapter_klass
@@ -10,7 +10,7 @@ module ActionMessage
       end
 
       def adapter_params
-        @@adapter_params ||= ActionMessage::Base.default_params[:adapter]
+        @@adapter_params ||= ActionMessenger::Base.default_params[:adapter]
       end
 
       def adapter_credentials

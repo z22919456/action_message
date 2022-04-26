@@ -1,17 +1,17 @@
 require 'spec_helper'
 
-describe ActionMessage::Base do
+describe ActionMessenger::Base do
   it 'inherits from AbstractController::Base' do
     expect(subject.class.superclass).to eq(AbstractController::Base)
   end
 
   context 'included modules' do
-    %w(
+    %w[
       AbstractController::Rendering
       AbstractController::Logger
       AbstractController::Callbacks
       ActionView::Layouts
-    ).each do |module_name|
+    ].each do |module_name|
       it "includes #{module_name}" do
         expect(subject.class.included_modules).to include(module_name.constantize)
       end
@@ -21,18 +21,18 @@ describe ActionMessage::Base do
   context 'class methods' do
     it '.default_params' do
       expect(subject.class.default_params).to eq({
-        adapter: {
-          name: :test,
-          credentials: {}
-        }
-      })
+                                                   adapter: {
+                                                     name: :test,
+                                                     credentials: {}
+                                                   }
+                                                 })
     end
 
     describe '.default' do
       it 'should merge values passed to .default_params' do
-        expect(subject.class.default_params[:adapter]).to eq({name: :test, credentials: {}})
-        subject.class.default(adapter: { name: :twilio, credentials: {a: :b} })
-        expect(subject.class.default_params[:adapter]).to eq({name: :twilio, credentials: {a: :b}})
+        expect(subject.class.default_params[:adapter]).to eq({ name: :test, credentials: {} })
+        subject.class.default(adapter: { name: :twilio, credentials: { a: :b } })
+        expect(subject.class.default_params[:adapter]).to eq({ name: :twilio, credentials: { a: :b } })
       end
 
       it 'should be aliased with .default_options=' do
@@ -41,13 +41,13 @@ describe ActionMessage::Base do
     end
 
     it '.base_paths' do
-      base_paths = %w(
+      base_paths = %w[
         app/views
         app/views/messages
         app/views/mailers
         app/views/application
         app/views/layouts
-      )
+      ]
 
       expect(subject.class.base_paths).to eq(base_paths)
     end
@@ -55,9 +55,9 @@ describe ActionMessage::Base do
     describe '.method_missing' do
       it 'should instantiate MessageDelivery when .action_methods include the method' do
         message_delivery = subject.class.an_action_method('argument1', 'argument2')
-        expect(message_delivery).to be_an(ActionMessage::MessageDelivery)
+        expect(message_delivery).to be_an(ActionMessenger::MessageDelivery)
         expect(message_delivery.action).to eq(:an_action_method)
-        expect(message_delivery.args).to eq(['argument1', 'argument2'])
+        expect(message_delivery.args).to eq(%w[argument1 argument2])
       end
     end
   end
@@ -65,7 +65,7 @@ describe ActionMessage::Base do
   context 'instance methods' do
     it '#initialize' do
       expect(subject.instance_variable_get(:@_message_was_called)).to be_falsey
-      expect(subject.instance_variable_get(:@_message)).to be_an(ActionMessage::Message)
+      expect(subject.instance_variable_get(:@_message)).to be_an(ActionMessenger::Message)
     end
 
     describe '#sms' do
