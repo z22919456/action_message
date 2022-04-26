@@ -5,9 +5,8 @@ module ActionMessenger
         super(params)
       end
 
-      def send_message(body, params = {})
-        super(body, params)
-        puts "Sending message to #{params[:to]}"
+      def send_message(message, params = {})
+        super(message, params)
       end
     end
   end
