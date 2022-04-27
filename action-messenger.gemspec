@@ -3,7 +3,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'action_messenger/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'action_messenger'
+  spec.name          = 'action-messenger'
   spec.version       = ActionMessenger::VERSION
   spec.authors       = ['David']
   spec.email         = ['z22919456@gmail.com']
