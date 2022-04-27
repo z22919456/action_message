@@ -5,12 +5,12 @@ require 'action_messenger/version'
 Gem::Specification.new do |spec|
   spec.name          = 'action_messenger'
   spec.version       = ActionMessenger::VERSION
-  spec.authors       = ['Diego Ballona']
-  spec.email         = ['root@dballona.com']
+  spec.authors       = ['David']
+  spec.email         = ['z22919456@gmail.com']
 
-  spec.summary       = 'ActionMailer heavily-inspired gem to handle SMS/Text Messages'
-  spec.description   = 'ActionMailer heavily-inspired gem to handle SMS/Text Messages'
-  spec.homepage      = 'http://github.com/dballona/action_messenger'
+  spec.summary       = 'Refenrence dballona/action_message. SMS/Text Messages gem, just like ActionMessenger'
+  spec.description   = 'Refenrence dballona/action_message. SMS/Text Messages gem, just like ActionMessenger'
+  spec.homepage      = 'http://github.com/z22919456/action_messenger'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
