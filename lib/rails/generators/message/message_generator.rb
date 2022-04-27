@@ -5,10 +5,10 @@ module Rails
 
       argument :actions, type: :array, default: [], banner: "method method"
 
-      check_class_collision suffix: "Message"
+      check_class_collision suffix: "Messenger"
 
       def create_message_file
-        template "message.rb", File.join("app/messages", class_path, "#{file_name}_message.rb")
+        template "message.rb", File.join("app/messenger", class_path, "#{file_name}_messenger.rb")
       end
 
       protected
