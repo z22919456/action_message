@@ -12,7 +12,7 @@ Install it using bundler:
 gem 'action_messenger'
 ```
 
-## Config
+## Configuration
 Place this on your environment file or application.rb
 
 ```ruby
