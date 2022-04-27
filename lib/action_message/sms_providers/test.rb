@@ -1,4 +1,4 @@
-module ActionMessenger
+module ActionMessage
   module SMSProviders
     class Test < Base
       def initialize(params = {})

@@ -1,4 +1,4 @@
-module ActionMessenger
+module ActionMessage
   class Interceptor
     cattr_accessor :blacklist
     self.blacklist = {}

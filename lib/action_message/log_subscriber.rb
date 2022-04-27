@@ -1,6 +1,6 @@
 require 'active_support/log_subscriber'
 
-module ActionMessenger
+module ActionMessage
   class LogSubscriber < ActiveSupport::LogSubscriber
     def deliver(_event)
       info do
@@ -17,9 +17,9 @@ module ActionMessenger
     end
 
     def logger
-      ActionMessenger::Base.logger || Rails.logger
+      ActionMessage::Base.logger || Rails.logger
     end
   end
 end
 
-ActionMessenger::LogSubscriber.attach_to :action_messenger
+ActionMessage::LogSubscriber.attach_to :action_message

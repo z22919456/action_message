@@ -1,7 +1,7 @@
-require 'action_messenger/sms_providers/base'
-require 'action_messenger/sms_providers/test'
+require 'action_message/sms_providers/base'
+require 'action_message/sms_providers/test'
 
-module ActionMessenger
+module ActionMessage
   module SMSProviders
     extend ActiveSupport::Concern
 

@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe ActionMessenger::Interceptor do
+describe ActionMessage::Interceptor do
   context 'class methods' do
-    subject { ActionMessenger::Interceptor }
+    subject { ActionMessage::Interceptor }
 
     describe '#register' do
       it 'raises when anything other than hash provided' do
@@ -43,7 +43,7 @@ describe ActionMessenger::Interceptor do
 
     describe '#registered_for?' do
       let(:message) do
-        message = ActionMessenger::Message.new
+        message = ActionMessage::Message.new
         message.body = 'This is a message body'
         message.to = '+11231231234'
         message.debug = false

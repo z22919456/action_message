@@ -1,4 +1,4 @@
-module ActionMessenger
+module ActionMessage
   module SMSProviders
     class Base
       def initialize(params = {})
@@ -12,7 +12,7 @@ module ActionMessenger
       end
 
       def senders
-        @senders ||= @params[:from].present? ? @params[:from] : ActionMessenger::Base.default_params[:from]
+        @senders ||= @params[:from].present? ? @params[:from] : ActionMessage::Base.default_params[:from]
       end
 
       private

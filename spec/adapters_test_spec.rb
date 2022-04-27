@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe ActionMessenger::Adapters::Test do
+describe ActionMessage::Adapters::Test do
   let(:credentials) { { something: 'this' } }
-  subject { ActionMessenger::Adapters::Test.new(credentials) }
+  subject { ActionMessage::Adapters::Test.new(credentials) }
 
   context 'instance methods' do
     it '#initialize' do

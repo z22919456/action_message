@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ActionMessenger::Base do
+describe ActionMessage::Base do
   it 'inherits from AbstractController::Base' do
     expect(subject.class.superclass).to eq(AbstractController::Base)
   end
@@ -55,7 +55,7 @@ describe ActionMessenger::Base do
     describe '.method_missing' do
       it 'should instantiate MessageDelivery when .action_methods include the method' do
         message_delivery = subject.class.an_action_method('argument1', 'argument2')
-        expect(message_delivery).to be_an(ActionMessenger::MessageDelivery)
+        expect(message_delivery).to be_an(ActionMessage::MessageDelivery)
         expect(message_delivery.action).to eq(:an_action_method)
         expect(message_delivery.args).to eq(%w[argument1 argument2])
       end
@@ -65,7 +65,7 @@ describe ActionMessenger::Base do
   context 'instance methods' do
     it '#initialize' do
       expect(subject.instance_variable_get(:@_message_was_called)).to be_falsey
-      expect(subject.instance_variable_get(:@_message)).to be_an(ActionMessenger::Message)
+      expect(subject.instance_variable_get(:@_message)).to be_an(ActionMessage::Message)
     end
 
     describe '#sms' do
