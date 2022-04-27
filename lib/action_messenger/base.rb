@@ -92,7 +92,7 @@ module ActionMessenger
       self.template_path = params[:template_path].presence || template_path
 
       @_short_message_was_called = true
-      wrap_service_behavior!
+      wrap_sms_provider_behavior!
 
       # elookup_context.view_paths = (lookup_context.view_paths.to_a + self.class.base_paths).flatten.uniq
 

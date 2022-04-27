@@ -2,12 +2,11 @@ module ActionMessenger
   # include ActionMessenger::Adapters
 
   class ShortMessage
-    attr_accessor :action, :message, :to, :debug, :options, :perform_deliveries, :raise_delivery_errors,
-                  :service_provider
-    attr_reader :service
+    attr_accessor :action, :message, :to, :debug, :options, :raise_delivery_errors
+    attr_reader :sms_provider
 
-    def service(method = nil, settings = {})
-      @service = method.new(settings)
+    def sms_provider(method = nil, settings = {})
+      @sms_provider = method.new(settings)
     end
 
     # Initialize the observers and interceptors arrays
@@ -42,7 +41,7 @@ module ActionMessenger
 
     def deliver
       ActiveSupport::Notifications.instrument('deliver.action_messenger', { messagage: message, to: to }) do
-        @service.send_message(message, options.merge(to: to))
+        @sms_provider.send_message(message, options.merge(to: to))
       end
       inform_observers
     end
