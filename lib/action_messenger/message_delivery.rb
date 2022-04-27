@@ -8,25 +8,29 @@ module ActionMessenger
       @args = args
     end
 
-    def deliver_now
-      processed_messenger.send(action, @args).deliver
+    def messenger_instance
+      processed_messenger.send(action, *@args)
     end
 
-    def deliver_later(_options = {})
-      enqueue_delivery :deliver_now, optionse
+    def deliver_now
+      processed_messenger.send(action, *@args).deliver
+    end
+
+    def deliver_later(options = {})
+      enqueue_delivery :deliver_now, options
     end
 
     protected
 
     def processed_messenger
       # message_delivery with template and all messenger need
-      @processed_messenger ||= @messenger_class.new.tap do |messenger|
-        messenger.process @action, *@args
+      @processed_messenger ||= @messenger_class.new.tap do |messenger_instance|
+        messenger_instance.process @action, *@args
       end
     end
 
     def enqueue_delivery(delivery_method, options = {})
-      args = @message_class.name, @action.to_s, delivery_method.to_s, *@args
+      args = @messenger_class.name, @action.to_s, delivery_method.to_s, *@args
       ::ActionMessenger::DeliveryJob.set(options).perform_later(*args)
     end
   end

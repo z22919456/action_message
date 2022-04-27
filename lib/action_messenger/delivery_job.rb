@@ -2,7 +2,7 @@ require 'active_job'
 
 module ActionMessenger
   class DeliveryJob < ActiveJob::Base
-    queue_as { :messages }
+    queue_as { ActionMessenger::Base.deliver_later_queue_name }
 
     rescue_from StandardError, with: :handle_exception_with_message_class
 

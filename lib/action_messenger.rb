@@ -1,10 +1,10 @@
 require 'abstract_controller'
 
-require 'action_messenger/adapters'
+require 'action_messenger/sms_providers'
 require 'action_messenger/base'
 require 'action_messenger/delivery_job'
 require 'action_messenger/interceptor'
-require 'action_messenger/message'
+require 'action_messenger/short_message'
 require 'action_messenger/message_delivery'
 require 'action_messenger/version'
 require 'action_messenger/railtie'

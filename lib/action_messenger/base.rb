@@ -5,6 +5,8 @@ require 'action_messenger/log_subscriber'
 
 module ActionMessenger
   class Base < AbstractController::Base
+    include SMSProviders
+
     abstract!
 
     include AbstractController::Rendering
@@ -69,32 +71,36 @@ module ActionMessenger
       end
     end
 
-    attr_internal :message
+    attr_internal :short_message
     attr_accessor :template_name, :template_path
 
     def initialize
       super
-      @_message_was_called = false
-      @_message = Message.new
+      @_short_message_was_called = false
+      @_short_message = ShortMessage.new
+    end
+
+    def payload
+      default_options
     end
 
     def sms(params = {}, &block)
       raise ArgumentError, 'You need to provide at least a receipient' if params[:to].blank?
-      return message if @_message_was_called && !block
+      return short_message if @_short_message_was_called && !block
 
       self.template_name = params[:template_name].presence || template_name
       self.template_path = params[:template_path].presence || template_path
 
-      @_message_was_called = true
+      @_short_message_was_called = true
+      wrap_service_behavior!
 
       # elookup_context.view_paths = (lookup_context.view_paths.to_a + self.class.base_paths).flatten.uniq
 
-      message.to = params[:to]
-      message.debug = params[:debug]
-      message.message = params[:message] || render(full_template_path)
-      message.options = params.reject! { |p| %i[to debug message].include?(p) }
-
-      message
+      short_message.to = params[:to]
+      short_message.debug = params[:debug]
+      short_message.message = params[:message] || render(full_template_path)
+      short_message.options = params.reject! { |p| %i[to debug message].include?(p) }
+      short_message
     end
 
     def process(method_name, *args)
@@ -108,7 +114,7 @@ module ActionMessenger
 
       ActiveSupport::Notifications.instrument('process.action_messenger', payload) do
         super
-        @_message = NullMessage.new unless @_message_was_called
+        @_short_message = NullMessage.new unless @_short_message_was_called
       end
     end
 

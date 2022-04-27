@@ -1,5 +1,5 @@
 module ActionMessenger
-  module Adapters
+  module SMSProviders
     class Base
       def initialize(params = {})
         @params = params
