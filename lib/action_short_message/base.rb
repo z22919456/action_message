@@ -1,9 +1,9 @@
 require 'active_support/core_ext/string/inflections'
 require 'active_support/core_ext/hash/except'
 require 'active_support/core_ext/module/anonymous'
-require 'action_message/log_subscriber'
+require 'action_short_message/log_subscriber'
 
-module ActionMessage
+module ActionShortMessage
   class Base < AbstractController::Base
     include SMSProviders
 
@@ -37,7 +37,7 @@ module ActionMessage
       }
 
       # Sets the defaults through app configuration:
-      # config.action_message.default()
+      # config.action_short_message.default()
       #
       # Aliased by ::default_options=
       #
@@ -46,7 +46,7 @@ module ActionMessage
         default_params
       end
       # Allows to set defaults through app configuration:
-      # config.action_message = { charset: 'ISO-8859-1' }
+      # config.action_short_message = { charset: 'ISO-8859-1' }
       #
       alias default_options= default
 
@@ -112,7 +112,7 @@ module ActionMessage
       self.template_path ||= self.class.name.underscore
       self.template_name ||= method_name
 
-      ActiveSupport::Notifications.instrument('process.action_message', payload) do
+      ActiveSupport::Notifications.instrument('process.action_short_message', payload) do
         super
         @_short_message = NullMessage.new unless @_short_message_was_called
       end
@@ -140,6 +140,6 @@ module ActionMessage
       end
     end
 
-    ActiveSupport.run_load_hooks(:action_message, self)
+    ActiveSupport.run_load_hooks(:action_short_message, self)
   end
 end

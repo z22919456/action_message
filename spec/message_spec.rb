@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ActionMessage::Message do
+describe ActionShortMessage::Message do
   context 'accessor attributes' do
     %w[action args body to debug].each do |attribute|
       it ":#{attribute}" do
@@ -20,7 +20,7 @@ describe ActionMessage::Message do
 
   context 'instance methods' do
     it '#initialize' do
-      expect(subject.adapter).to eq(ActionMessage::Adapters.adapter)
+      expect(subject.adapter).to eq(ActionShortMessage::Adapters.adapter)
     end
 
     it '#debug?' do
@@ -34,20 +34,20 @@ describe ActionMessage::Message do
     describe '#deliver' do
       it 'do not call send_message debug = true' do
         subject.debug = true
-        expect_any_instance_of(ActionMessage::Adapters::Test).not_to receive(:send_message)
+        expect_any_instance_of(ActionShortMessage::Adapters::Test).not_to receive(:send_message)
         expect(subject.deliver).to be_nil
       end
 
       it 'doesnt call send_message when interceptor registered' do
         subject.to = '+123456789'
-        ActionMessage::Interceptor.register(to: subject.to)
-        expect_any_instance_of(ActionMessage::Adapters::Test).not_to receive(:send_message)
+        ActionShortMessage::Interceptor.register(to: subject.to)
+        expect_any_instance_of(ActionShortMessage::Adapters::Test).not_to receive(:send_message)
         expect(subject.deliver).to be_nil
       end
 
       it 'call send_message if debug = false' do
         subject.debug = false
-        expect_any_instance_of(ActionMessage::Adapters::Test).to receive(:send_message).and_return('called')
+        expect_any_instance_of(ActionShortMessage::Adapters::Test).to receive(:send_message).and_return('called')
         expect(subject.deliver).to eq('called')
       end
     end

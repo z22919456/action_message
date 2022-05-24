@@ -1,16 +1,16 @@
 lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'action_message/version'
+require 'action_short_message/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'action_message'
-  spec.version       = ActionMessage::VERSION
+  spec.name          = 'action_short_message'
+  spec.version       = ActionShortMessage::VERSION
   spec.authors       = ['David']
   spec.email         = ['z22919456@gmail.com']
 
-  spec.summary       = 'Refenrence dballona/action_message. SMS/Text Messages gem, just like ActionMessage'
-  spec.description   = 'Refenrence dballona/action_message. SMS/Text Messages gem, just like ActionMessage'
-  spec.homepage      = 'http://github.com/z22919456/action_message'
+  spec.summary       = 'Refenrence dballona/action_short_message. SMS/Text Messages gem, just like ActionShortMessage'
+  spec.description   = 'Refenrence dballona/action_short_message. SMS/Text Messages gem, just like ActionShortMessage'
+  spec.homepage      = 'http://github.com/z22919456/action_short_message'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }

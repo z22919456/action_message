@@ -1,11 +1,11 @@
 require 'spec_helper'
 require 'support/messages/base_message'
 
-describe ActionMessage::MessageDelivery do
+describe ActionShortMessage::MessageDelivery do
   let(:message_class) { BaseMessage }
   let(:action) { :welcome_with_two_arguments }
   let(:args) { ['John Doe', 'johnshoes.com'] }
-  subject { ActionMessage::MessageDelivery.new(message_class, action, *args) }
+  subject { ActionShortMessage::MessageDelivery.new(message_class, action, *args) }
 
   context 'reader attributes' do
     %w[message_class action args].each do |attribute|
@@ -40,7 +40,7 @@ describe ActionMessage::MessageDelivery do
 
     it '#deliver_later' do
       job = double
-      expect(ActionMessage::DeliveryJob).to receive(:set).and_return(job)
+      expect(ActionShortMessage::DeliveryJob).to receive(:set).and_return(job)
       expect(job).to receive(:perform_later).with(message_class.to_s, action.to_s, 'deliver_now', *args)
       subject.deliver_later
     end

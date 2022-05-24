@@ -1,5 +1,5 @@
 <% module_namespacing do -%>
-class <%= class_name %>Messenger < ActionMessage::Base
+class <%= class_name %>Messenger < ActionShortMessage::Base
 <% actions.each do |action| -%>
   def <%= action %>
     sms(to: '0987654321', message: "<%= action%>")

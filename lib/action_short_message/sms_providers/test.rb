@@ -1,4 +1,4 @@
-module ActionMessage
+module ActionShortMessage
   module SMSProviders
     class Test < Base
       def initialize(params = {})
@@ -7,10 +7,10 @@ module ActionMessage
 
       def send_message(message, params = {})
         puts "SMS TEST: send short message to #{params[:to]}, context:"
-        puts "options"
+        puts 'options'
         puts params
         puts message
-        puts "Completed!"
+        puts 'Completed!'
         super(message, params)
       end
     end

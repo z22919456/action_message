@@ -1,5 +1,5 @@
-module ActionMessage
-  # include ActionMessage::Adapters
+module ActionShortMessage
+  # include ActionShortMessage::Adapters
 
   class ShortMessage
     attr_accessor :action, :message, :to, :debug, :options, :raise_delivery_errors
@@ -40,7 +40,7 @@ module ActionMessage
     end
 
     def deliver
-      ActiveSupport::Notifications.instrument('deliver.action_message', { messagage: message, to: to }) do
+      ActiveSupport::Notifications.instrument('deliver.action_short_message', { messagage: message, to: to }) do
         @sms_provider.send_message(message, options.merge(to: to))
       end
       inform_observers

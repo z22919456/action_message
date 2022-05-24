@@ -1,8 +1,8 @@
 require 'active_job'
 
-module ActionMessage
+module ActionShortMessage
   class DeliveryJob < ActiveJob::Base
-    queue_as { ActionMessage::Base.deliver_later_queue_name }
+    queue_as { ActionShortMessage::Base.deliver_later_queue_name }
 
     rescue_from StandardError, with: :handle_exception_with_message_class
 

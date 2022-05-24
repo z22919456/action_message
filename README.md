@@ -1,6 +1,6 @@
-# ActionMessage
+# ActionShortMessage
 
-ActionMessage reference to [dballona/actionmessage](https://github.com/dballona/actionmessage), is heavily-inspired on ActionMailer.
+ActionShortMessage reference to [dballona/actionmessage](https://github.com/dballona/actionmessage), is heavily-inspired on ActionMailer.
 It's a gem for sending SMS/Text messages like we do for sending e-mails on ActionMailer.
 
 ## Setup
@@ -9,7 +9,7 @@ Install it using bundler:
 
 ```ruby
 # Gemfile
-gem 'action_message'
+gem 'action_short_message'
 ```
 
 ## Configuration
@@ -18,13 +18,13 @@ Place this on your environment file or application.rb
 ```ruby
 
 # Setting logger, default is Rails.logger
-config.action_message.logger = Rails.logger
+config.action_short_message.logger = Rails.logger
 
 # Setting short message service provider, default is setting.
 #
 # Highly recommended place this on the environment files, and set 
 # development sms_provider to :test it can save your money
-config.action_message.sms_provider = :test 
+config.action_short_message.sms_provider = :test 
 
 
 ```
@@ -33,7 +33,7 @@ config.action_message.sms_provider = :test
 Default provider is `test`, I also made a provider, use Mitake(山竹簡訊) api.
 You can add [mitake_sms](http://) in Taiwan 🇹🇼
 
-you also can create your provider, by implement `ActionMessage::SMSProviders::Base` and add provider follow by `ActionMessage::Base.add_provider(symbol, YourProvider, provider_setting)`
+you also can create your provider, by implement `ActionShortMessage::SMSProviders::Base` and add provider follow by `ActionShortMessage::Base.add_provider(symbol, YourProvider, provider_setting)`
 
 ## Usage
 
@@ -42,7 +42,7 @@ under app/messengers/welcome_message.rb or just use generators by running
 the following command: `rails g messenger Welcome send_welcome_sms`
 
 ```ruby
-class WelcomeMessenger < ActionMessage::Base
+class WelcomeMessenger < ActionShortMessage::Base
   def send_welcome_sms(name, phone_number_to_send_message)
     @name = name
     sms(to: phone_number_to_send_message)

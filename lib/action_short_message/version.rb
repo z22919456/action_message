@@ -1,3 +1,3 @@
-module ActionMessage
+module ActionShortMessage
   VERSION = '0.1.0'.freeze
 end

@@ -1,13 +1,13 @@
 require 'abstract_controller'
 
-require 'action_message/sms_providers'
-require 'action_message/base'
-require 'action_message/delivery_job'
-require 'action_message/interceptor'
-require 'action_message/short_message'
-require 'action_message/message_delivery'
-require 'action_message/version'
-require 'action_message/railtie'
+require 'action_short_message/sms_providers'
+require 'action_short_message/base'
+require 'action_short_message/delivery_job'
+require 'action_short_message/interceptor'
+require 'action_short_message/short_message'
+require 'action_short_message/message_delivery'
+require 'action_short_message/version'
+require 'action_short_message/railtie'
 
 require 'active_support'
 require 'active_support/rails'
@@ -16,7 +16,7 @@ require 'active_support/core_ext/module/attr_internal'
 require 'active_support/core_ext/string/inflections'
 require 'active_support/lazy_load_hooks'
 
-module ActionMessage
+module ActionShortMessage
   extend ::ActiveSupport::Autoload
 
   autoload :Base

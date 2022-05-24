@@ -1,8 +1,8 @@
 # require 'spec_helper'
 
-# describe ActionMessage::Adapters::Test do
+# describe ActionShortMessage::Adapters::Test do
 #   let(:credentials) { { account_sid: '123', auth_token: '456' } }
-#   subject { ActionMessage::Adapters::Twilio.new(credentials) }
+#   subject { ActionShortMessage::Adapters::Twilio.new(credentials) }
 
 #   context 'instance methods' do
 #     it '#initialize' do

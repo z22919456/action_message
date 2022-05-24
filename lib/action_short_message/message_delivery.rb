@@ -1,4 +1,4 @@
-module ActionMessage
+module ActionShortMessage
   class MessageDelivery
     attr_reader :messenger_class, :action, :args
 
@@ -31,7 +31,7 @@ module ActionMessage
 
     def enqueue_delivery(delivery_method, options = {})
       args = @messenger_class.name, @action.to_s, delivery_method.to_s, *@args
-      ::ActionMessage::DeliveryJob.set(options).perform_later(*args)
+      ::ActionShortMessage::DeliveryJob.set(options).perform_later(*args)
     end
   end
 end
